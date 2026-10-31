@@ -1,0 +1,90 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #s9-ttl { top: 110px !important; }
+    #s9-marc { left: 190px; top: 420px; width: 240px; height: 504px; }
+    #s9-sophie { left: 1600px; top: 420px; width: 240px; height: 504px; }
+    #s9-phone { left: 460px; top: 352px; transform-origin: 0 0; }
+    #s9-lap { position: absolute; left: 930px; top: 372px; width: 640px; height: 430px; }
+    #s9-lscr { position: absolute; left: 0; top: 0; width: 640px; height: 404px; border-radius: 22px; background: #1f2a1d; padding: 14px; box-shadow: 0 30px 60px rgba(31, 42, 29, 0.2); }
+    #s9-lin { position: relative; width: 100%; height: 100%; border-radius: 12px; background: #fbfaf6; overflow: hidden; }
+    #s9-lbase { position: absolute; left: -40px; top: 404px; width: 720px; height: 26px; border-radius: 0 0 18px 18px; background: #2c3829; }
+    .s9-col { position: absolute; }
+    .s9-col b { display: block; height: 12px; border-radius: 6px; background: #cfc9bb; margin-bottom: 12px; }
+    .s9-bar { display: block; border-radius: 6px; border: 2px solid #d8d1c1; background: #fff; }
+    .s9-bar.st-rented { background: #dde5d3; border-color: #c4d0b7; }
+    .s9-bar.st-soon { background: #cdd6de; border-color: #b4c0ca; }
+    .s9-bar.st-out { background: #e6c994; border-color: #d6b578; }
+    .s9-top { position: absolute; left: 18px; right: 18px; top: 16px; height: 22px; display: flex; gap: 10px; align-items: center; }
+    .s9-top b { width: 22px; height: 22px; border-radius: 7px; background: #4a5c3d; display: block; }
+    .s9-top i { width: 110px; height: 11px; border-radius: 6px; background: #dcd6c8; display: block; }
+    #s9-p1 { position: absolute; left: 470px; top: 912px; }
+    #s9-p2 { position: absolute; left: 1138px; top: 830px; }
+  </style>
+  <div id="root" data-composition-id="s09" data-width="1920" data-height="1080">
+    <div id="s9-ttl-host"></div>
+    <div id="s9-marc-host"></div>
+    <div id="s9-sophie-host"></div>
+    <div class="phone" id="s9-phone"><div class="screen" id="s9-pin"><div class="notch"></div></div></div>
+    <div id="s9-lap">
+      <div id="s9-lscr"><div id="s9-lin"><div class="s9-top"><b></b><i></i></div></div></div>
+      <div id="s9-lbase"></div>
+    </div>
+    <div class="pill" id="s9-p1"><i></i>Sur site</div>
+    <div class="pill" id="s9-p2"><i></i>Au bureau</div>
+  </div>
+  <script>
+    (function () {
+      document.getElementById("s9-ttl-host").outerHTML = AS.title("s9", "09 — Équipe", "Sur site ou au bureau,", "toute l'équipe est à jour.");
+      AS.mount("s9-marc-host", "s9-marc", "marc");
+      AS.mount("s9-sophie-host", "s9-sophie", "sophie");
+      const st = Object.assign({}, AS.STATES, { c4: "rented" });
+      const sizes = ["S", "M", "L", "C"];
+      function cols(prefix, x0, y0, cw, gap, bh, bgap) {
+        let s = "";
+        sizes.forEach(function (sz, c) {
+          s += '<div class="s9-col" style="left:' + (x0 + c * (cw + gap)) + "px;top:" + y0 + "px;width:" + cw + 'px"><b></b>';
+          AS.PARK.tiles.filter(function (t) { return t.size === sz; }).forEach(function (t) {
+            s += '<i class="s9-bar st-' + st[t.id] + '" id="' + prefix + "-" + t.id + '" style="height:' + bh + "px;margin-bottom:" + bgap + 'px"></i>';
+          });
+          s += "</div>";
+        });
+        return s;
+      }
+      document.getElementById("s9-pin").insertAdjacentHTML("beforeend", '<div class="s9-top" style="top:44px"><b></b><i></i></div>' + cols("s9p", 16, 86, 54, 9, 26, 9));
+      document.getElementById("s9-lin").insertAdjacentHTML("beforeend", cols("s9l", 28, 58, 124, 22, 24, 8));
+      const tl = gsap.timeline({ paused: true });
+      // les deux écrans s'ouvrent depuis le centre, là où les colonnes se sont resserrées
+      tl.fromTo("#s9-phone", { x: 400, y: 120, scale: 0.3, opacity: 0 }, { x: 0, y: 0, scale: 0.85, opacity: 1, duration: 0.8, ease: "expo.out" }, 0.05);
+      tl.fromTo("#s9-lap", { x: -300, y: 60, scale: 0.4, opacity: 0 }, { x: 0, y: 0, scale: 1, opacity: 1, duration: 0.8, ease: "expo.out" }, 0.1);
+      tl.fromTo("#s9-marc", { x: -360, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "expo.out" }, 0.45);
+      tl.fromTo("#s9-sophie", { x: 360, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "expo.out" }, 0.55);
+      tl.fromTo(["#s9-p1", "#s9-p2"], { opacity: 0, y: 14, scale: 0.7 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease: "back.out(2)", stagger: 0.12 }, 1.0);
+      AS.titleIn(tl, "s9", 0.4);
+      tl.to("#s9-marc-head", { rotation: 6, duration: 0.4, ease: "power2.inOut" }, 1.0);
+      tl.to("#s9-sophie-head", { rotation: -6, duration: 0.4, ease: "power2.inOut" }, 1.1);
+      AS.blink(tl, "s9-marc", 1.6);
+      AS.blink(tl, "s9-sophie", 1.9);
+      // mises à jour simultanées sur les deux écrans
+      function update(id, color, border, t) {
+        ["#s9p-" + id, "#s9l-" + id].forEach(function (sel) {
+          tl.to(sel, { backgroundColor: color, borderColor: border, duration: 0.2, ease: "power2.out" }, t);
+          tl.to(sel, { scaleX: 1.08, scaleY: 1.3, duration: 0.1, ease: "power2.out" }, t).to(sel, { scaleX: 1, scaleY: 1, duration: 0.35, ease: "back.out(3)" }, t + 0.1);
+        });
+      }
+      update("m3", "#dde5d3", "#c4d0b7", 2.3);
+      AS.mood(tl, "s9-marc", "big", 2.4);
+      AS.mood(tl, "s9-sophie", "big", 2.45);
+      update("s5", "#ffffff", "#d8d1c1", 3.2);
+      update("l4", "#dde5d3", "#c4d0b7", 3.9);
+      AS.blink(tl, "s9-sophie", 4.2);
+      AS.blink(tl, "s9-marc", 4.5);
+      // sortie
+      AS.titleOut(tl, "s9", 5.3);
+      tl.to(["#s9-marc", "#s9-sophie", "#s9-p1", "#s9-p2"], { opacity: 0, duration: 0.35, ease: "power2.in" }, 5.35);
+      tl.to("#s9-phone", { x: 420, y: 100, scale: 0.4, opacity: 0, duration: 0.55, ease: "power3.in" }, 5.4);
+      tl.to("#s9-lap", { x: -320, y: 40, scale: 0.5, opacity: 0, duration: 0.55, ease: "power3.in" }, 5.4);
+      window.__timelines["s09"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,120 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    #s3-dot { position: absolute; left: 1232px; top: 522px; width: 36px; height: 36px; border-radius: 50%; background: #4a5c3d; }
+    #s3-phone { left: 1100px; top: 230px; transform-origin: 50% 50%; }
+    #s3-lea { left: 1460px; top: 352px; width: 280px; height: 588px; }
+    #s3-moon { position: absolute; left: 1700px; top: 150px; width: 54px; height: 54px; border-radius: 50%; background: #e7dac3; box-shadow: inset -14px -6px 0 #d3c7ad; }
+    .s3-head { position: absolute; left: 22px; top: 48px; right: 22px; display: flex; align-items: center; gap: 10px; }
+    .s3-head b { width: 26px; height: 26px; border-radius: 8px; background: #4a5c3d; display: block; }
+    .s3-head i { height: 12px; width: 110px; border-radius: 6px; background: #dcd6c8; display: block; }
+    .s3-card { position: absolute; left: 18px; right: 18px; height: 132px; border-radius: 18px; background: #fff; border: 2px solid #e6e0d2; }
+    .s3-card .nm { position: absolute; left: 18px; top: 16px; font-size: 22px; font-weight: 800; letter-spacing: -0.02em; }
+    .s3-card .ic { position: absolute; right: 16px; top: 16px; width: 70px; height: 52px; border-radius: 8px; background: #dde5d3; }
+    .s3-card .ic.c { background: repeating-linear-gradient(90deg, #a9b79c 0 3px, #dde5d3 3px 12px); }
+    .s3-card .st { position: absolute; left: 18px; bottom: 16px; font-size: 16px; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: #dde5d3; color: #35422d; }
+    .s3-card .bars { position: absolute; left: 18px; top: 52px; width: 110px; }
+    #s3-full { position: absolute; inset: 0; background: #fbfaf6; }
+    #s3-hero { position: absolute; left: 18px; right: 18px; top: 52px; height: 150px; border-radius: 18px; background: #dde5d3; overflow: hidden; }
+    #s3-hero i { position: absolute; left: 30px; right: 30px; top: 30px; bottom: 22px; border-radius: 8px; background: repeating-linear-gradient(90deg, #8fa182 0 4px, #c9d5bc 4px 18px); }
+    #s3-ftitle { position: absolute; left: 22px; top: 222px; font-size: 26px; font-weight: 800; letter-spacing: -0.02em; }
+    #s3-fsub { position: absolute; left: 22px; top: 262px; width: 160px; }
+    #s3-dates { position: absolute; left: 18px; right: 18px; top: 312px; display: flex; gap: 8px; }
+    .s3-d { flex: 1; height: 74px; border-radius: 14px; border: 2px solid #e6e0d2; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; }
+    .s3-d i { width: 22px; height: 8px; border-radius: 4px; background: #dcd6c8; display: block; }
+    .s3-d b { width: 30px; height: 14px; border-radius: 4px; background: #b9b2a3; display: block; }
+    #s3-cal { position: absolute; left: 22px; top: 404px; display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; color: #4a5c3d; }
+    #s3-btn { position: absolute; left: 18px; right: 18px; bottom: 30px; height: 70px; border-radius: 18px; background: #4a5c3d; color: #fff; font-size: 24px; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+    #s3-btn2 { position: absolute; left: 18px; right: 18px; bottom: 30px; height: 70px; border-radius: 18px; background: #dde5d3; color: #35422d; font-size: 24px; font-weight: 800; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    #s3-btn2 svg { width: 26px; height: 26px; }
+  </style>
+  <div id="root" data-composition-id="s03" data-width="1920" data-height="1080">
+    <div id="s3-moon"></div>
+    <div id="s3-ttl-host"></div>
+    <div id="s3-lea-host"></div>
+    <div class="phone" id="s3-phone">
+      <div class="screen" id="s3-screen">
+        <div class="notch"></div>
+        <div class="s3-head"><b></b><i></i></div>
+        <div class="s3-card" id="s3-cS" style="top: 96px">
+          <span class="nm">Box S</span><span class="ic"></span><div class="bars"><i class="bar"></i></div>
+          <span class="st" id="s3-stS">Disponible</span>
+          <span class="st" id="s3-stS2" style="background: #ece7dc; color: #8b8676">Complet</span>
+        </div>
+        <div class="s3-card" id="s3-cM" style="top: 242px">
+          <span class="nm">Box M</span><span class="ic"></span><div class="bars"><i class="bar" style="width: 80%"></i></div>
+          <span class="st">Disponible</span>
+        </div>
+        <div class="s3-card" id="s3-cC" style="top: 388px">
+          <span class="nm">Conteneur</span><span class="ic c"></span><div class="bars"><i class="bar" style="width: 60%"></i></div>
+          <span class="st">Disponible</span>
+        </div>
+        <div id="s3-full">
+          <div id="s3-hero"><i></i></div>
+          <div id="s3-ftitle">Conteneur</div>
+          <div id="s3-fsub"><i class="bar"></i><i class="bar" style="width: 70%"></i></div>
+          <div id="s3-dates">
+            <div class="s3-d" id="s3-d1"><i></i><b></b></div>
+            <div class="s3-d" id="s3-d2"><i></i><b></b></div>
+            <div class="s3-d" id="s3-d3"><i></i><b></b></div>
+            <div class="s3-d" id="s3-d4"><i></i><b></b></div>
+          </div>
+          <div id="s3-cal">Date d'entrée choisie</div>
+          <div id="s3-btn">Souscrire</div>
+          <div id="s3-btn2"><svg viewBox="0 0 26 26"><path d="M5 13.5 L10.5 19 L21 7.5" fill="none" stroke="#4a5c3d" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Souscrit</div>
+        </div>
+      </div>
+    </div>
+    <div id="s3-dot"></div>
+  </div>
+  <script>
+    (function () {
+      document.getElementById("s3-ttl-host").outerHTML = AS.title("s3", "03 — Souscription", "Un soir, en ligne,", "en quelques gestes.");
+      AS.mount("s3-lea-host", "s3-lea", "lea");
+      const tl = gsap.timeline({ paused: true });
+      // le point vert s'ouvre en téléphone
+      tl.fromTo("#s3-dot", { scale: 1, opacity: 1 }, { scale: 3, opacity: 0, duration: 0.35, ease: "power2.in" }, 0.05);
+      tl.fromTo("#s3-phone", { scale: 0.06, borderRadius: 300, opacity: 0 }, { scale: 1, borderRadius: 46, opacity: 1, duration: 0.75, ease: "expo.out" }, 0.1);
+      tl.fromTo("#s3-full", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+      tl.fromTo(["#s3-cS", "#s3-cM", "#s3-cC"], { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.5, ease: "expo.out", stagger: 0.08 }, 0.55);
+      tl.fromTo("#s3-moon", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out" }, 0.4);
+      AS.titleIn(tl, "s3", 0.5);
+      // Léa
+      tl.fromTo("#s3-lea", { x: 300, opacity: 0 }, { x: 0, opacity: 1, duration: 0.8, ease: "expo.out" }, 0.4);
+      tl.to("#s3-lea-head", { rotation: -7, duration: 0.4, ease: "power2.out" }, 1.0);
+      AS.blink(tl, "s3-lea", 1.3);
+      // Box S passe en Complet
+      tl.to("#s3-stS", { opacity: 0, duration: 0.15 }, 1.7);
+      tl.fromTo("#s3-stS2", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 1.75);
+      tl.to("#s3-cS", { opacity: 0.55, duration: 0.3 }, 1.8);
+      AS.mood(tl, "s3-lea", "flat", 1.8);
+      // tap sur Conteneur, la tuile s'agrandit en plein écran
+      tl.to("#s3-cC", { scale: 0.96, duration: 0.08, ease: "power1.out" }, 2.5).to("#s3-cC", { scale: 1, duration: 0.12, ease: "power1.out" }, 2.58);
+      AS.mood(tl, "s3-lea", "smile", 2.55);
+      tl.to("#s3-cC > *", { opacity: 0, duration: 0.15 }, 2.7);
+      tl.to("#s3-cC", { y: 298 - 454, scaleX: 276 / 240, scaleY: 596 / 132, borderRadius: 0, duration: 0.55, ease: "power3.inOut" }, 2.72);
+      tl.to(["#s3-cS", "#s3-cM"], { opacity: 0, filter: "blur(6px)", duration: 0.3, ease: "power2.in" }, 2.72);
+      tl.to("#s3-full", { opacity: 1, duration: 0.25, ease: "power2.out" }, 3.15);
+      tl.fromTo("#s3-dates .s3-d", { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.4, ease: "expo.out", stagger: 0.06 }, 3.3);
+      tl.fromTo("#s3-cal", { opacity: 0 }, { opacity: 0, duration: 0.01 }, 0);
+      // choix d'une date
+      tl.to("#s3-d3", { scale: 0.94, duration: 0.08 }, 4.0).to("#s3-d3", { scale: 1, backgroundColor: "#4a5c3d", borderColor: "#4a5c3d", duration: 0.2, ease: "back.out(2)" }, 4.08);
+      tl.to("#s3-d3 i, #s3-d3 b", { backgroundColor: "#dde5d3", duration: 0.2 }, 4.08);
+      tl.to("#s3-cal", { opacity: 1, duration: 0.3 }, 4.2);
+      AS.blink(tl, "s3-lea", 4.4);
+      // Souscrire → Souscrit
+      tl.to("#s3-btn", { scale: 0.95, duration: 0.08 }, 4.9).to("#s3-btn", { scale: 1, duration: 0.12 }, 4.98);
+      tl.to("#s3-btn", { opacity: 0, duration: 0.15 }, 5.1);
+      tl.fromTo("#s3-btn2", { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, duration: 0.4, ease: "back.out(2.2)" }, 5.1);
+      AS.mood(tl, "s3-lea", "big", 5.15);
+      AS.jump(tl, "s3-lea", 5.35);
+      AS.blink(tl, "s3-lea", 6.6);
+      // sortie : Léa et le titre s'effacent, le téléphone reste (il se déplie dans la scène suivante)
+      AS.titleOut(tl, "s3", 7.6);
+      tl.to("#s3-lea", { x: 260, opacity: 0, duration: 0.45, ease: "power3.in" }, 7.65);
+      tl.to("#s3-moon", { opacity: 0, duration: 0.3 }, 7.7);
+      tl.to("#s3-phone", { x: 1250 - 1250, duration: 0.01 }, 8.4);
+      window.__timelines["s03"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,147 @@
+<!doctype html>
+<html
+  lang="fr"
+  data-composition-variables='[{"id":"tagline1","type":"string","label":"Signature ligne 1","default":"Le stockage,"},{"id":"tagline2","type":"string","label":"Signature ligne 2","default":"sans la gestion."},{"id":"url","type":"string","label":"Adresse","default":"aslot.fr"}]'
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/lib.js"></script>
+    <style>
+      :root {
+        --cream: #f1efe8;
+        --circle: #e9e4d8;
+        --ink: #35422d;
+        --olive: #4a5c3d;
+        --hl: #e7dac3;
+        --phone: #1f2a1d;
+        --lg: #dde5d3;
+        --soon: #cdd6de;
+        --out: #e6c994;
+        --line: #d8d1c1;
+        --shadow: 0 18px 40px rgba(53, 66, 45, 0.12);
+      }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        width: 1920px; height: 1080px; overflow: hidden;
+        background: var(--cream);
+        font-family: "Montserrat", sans-serif; color: var(--ink);
+      }
+      #root { position: relative; width: 100%; height: 100%; background: var(--cream); }
+
+      /* fond */
+      #bg { position: absolute; inset: 0; overflow: hidden; }
+      #bg .orb { position: absolute; border-radius: 50%; background: var(--circle); }
+
+      /* titres */
+      .ttl { position: absolute; left: 150px; top: 330px; width: auto; }
+      .ttl-label { font-size: 26px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--olive); margin-bottom: 26px; }
+      .ttl-mask { overflow: hidden; padding: 4px 6px 10px 0; margin-left: -2px; }
+      .ttl-l1, .ttl-l2 { white-space: nowrap; font-size: 66px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.04; }
+      .ttl-l2 { color: var(--olive); position: relative; display: inline-block; }
+      .ttl-l2 span { position: relative; }
+      .ttl-mark { position: absolute; left: -8px; right: -8px; bottom: 6px; height: 30px; background: var(--hl); border-radius: 6px; transform-origin: 0 50%; }
+
+      /* parc */
+      .stage { position: absolute; left: 840px; top: 260px; width: 940px; height: 560px; }
+      .park { position: absolute; left: 0; top: 0; width: 940px; height: 480px; }
+      .tile { position: absolute; border-radius: 14px; border: 2px solid var(--line); background: #fff; box-shadow: 0 6px 14px rgba(53, 66, 45, 0.06); overflow: hidden; }
+      .tile .tl { position: absolute; left: 12px; top: 9px; font-size: 18px; font-weight: 700; color: var(--ink); opacity: 0.75; }
+      .tile-C { border-radius: 10px; }
+      .tile-C .ribs { position: absolute; inset: 34px 10px 10px 10px; background: repeating-linear-gradient(90deg, rgba(53, 66, 45, 0.13) 0 3px, transparent 3px 16px); border-radius: 4px; }
+      .st-free { background: #fff; }
+      .st-rented { background: var(--lg); border-color: #c4d0b7; }
+      .st-soon { background: var(--soon); border-color: #b4c0ca; }
+      .st-out { background: var(--out); border-color: #d6b578; }
+      .legend { position: absolute; left: 0; top: 506px; display: flex; gap: 40px; font-size: 30px; font-weight: 600; }
+      .lg { display: flex; align-items: center; gap: 10px; }
+      .lg .dot { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--line); display: inline-block; }
+
+      /* téléphone */
+      .phone { position: absolute; width: 300px; height: 620px; border-radius: 46px; background: var(--phone); padding: 12px; box-shadow: 0 30px 60px rgba(31, 42, 29, 0.25); }
+      .phone .screen { position: relative; width: 100%; height: 100%; border-radius: 36px; background: #fbfaf6; overflow: hidden; }
+      .phone .notch { position: absolute; left: 50%; top: 10px; width: 86px; height: 22px; margin-left: -43px; border-radius: 12px; background: var(--phone); z-index: 5; }
+      .bar { display: block; height: 12px; border-radius: 6px; background: #dcd6c8; margin: 0 0 10px 0; }
+
+      .pill { display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: 999px; font-size: 28px; font-weight: 700; background: var(--lg); color: var(--ink); white-space: nowrap; }
+      .pill i { width: 12px; height: 12px; border-radius: 50%; background: var(--olive); display: inline-block; }
+      .card { background: #fff; border-radius: 22px; box-shadow: var(--shadow); }
+      .person { position: absolute; overflow: visible; }
+      .tag { position: absolute; font-size: 22px; font-weight: 700; color: var(--ink); white-space: nowrap; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="65" data-width="1920" data-height="1080">
+      <div id="bg" class="clip" data-start="0" data-duration="65" data-track-index="0" data-layout-ignore>
+        <div class="orb" id="orb1" style="width: 760px; height: 760px; left: -240px; top: -300px"></div>
+        <div class="orb" id="orb2" style="width: 980px; height: 980px; left: 1240px; top: 420px"></div>
+        <div class="orb" id="orb3" style="width: 420px; height: 420px; left: 640px; top: 760px"></div>
+      </div>
+
+      <div id="s01" data-composition-id="s01" data-composition-src="compositions/s01-lea.html" data-start="0" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="s02" data-composition-id="s02" data-composition-src="compositions/s02-marc.html" data-start="5.5" data-duration="6.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="s03" data-composition-id="s03" data-composition-src="compositions/s03-souscription.html" data-start="12" data-duration="8.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="s04" data-composition-id="s04" data-composition-src="compositions/s04-abonnement.html" data-start="20.5" data-duration="6" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="s05" data-composition-id="s05" data-composition-src="compositions/s05-attribution.html" data-start="26.5" data-duration="5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="s06" data-composition-id="s06" data-composition-src="compositions/s06-acces.html" data-start="31.5" data-duration="9" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="s07" data-composition-id="s07" data-composition-src="compositions/s07-mois.html" data-start="40.5" data-duration="5.5" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="s08" data-composition-id="s08" data-composition-src="compositions/s08-suivi.html" data-start="46" data-duration="6" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="s09" data-composition-id="s09" data-composition-src="compositions/s09-equipe.html" data-start="52" data-duration="6" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+      <div id="s10" data-composition-id="s10" data-composition-src="compositions/s10-signature.html" data-start="58" data-duration="7" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080"></div>
+
+      <!-- voix off : chaque phrase à +0,8 s du début de sa scène -->
+      <audio id="vo01" class="clip" src="assets/voice/vo01.mp3" data-start="0.8" data-duration="3.01" data-track-index="10" data-volume="1"></audio>
+      <audio id="vo02" class="clip" src="assets/voice/vo02.mp3" data-start="6.3" data-duration="3.19" data-track-index="10" data-volume="1"></audio>
+      <audio id="vo03" class="clip" src="assets/voice/vo03.mp3" data-start="12.8" data-duration="4.13" data-track-index="10" data-volume="1"></audio>
+      <audio id="vo04" class="clip" src="assets/voice/vo04.mp3" data-start="21.3" data-duration="2.93" data-track-index="10" data-volume="1"></audio>
+      <audio id="vo05" class="clip" src="assets/voice/vo05.mp3" data-start="27.3" data-duration="2.75" data-track-index="10" data-volume="1"></audio>
+      <audio id="vo06" class="clip" src="assets/voice/vo06.mp3" data-start="32.3" data-duration="3.45" data-track-index="10" data-volume="1"></audio>
+      <audio id="vo07" class="clip" src="assets/voice/vo07.mp3" data-start="41.3" data-duration="2.43" data-track-index="10" data-volume="1"></audio>
+      <audio id="vo08" class="clip" src="assets/voice/vo08.mp3" data-start="46.8" data-duration="2.17" data-track-index="10" data-volume="1"></audio>
+      <audio id="vo09" class="clip" src="assets/voice/vo09.mp3" data-start="52.8" data-duration="3.01" data-track-index="10" data-volume="1"></audio>
+      <audio id="vo10" class="clip" src="assets/voice/vo10.mp3" data-start="58.8" data-duration="3.01" data-track-index="10" data-volume="1"></audio>
+
+      <!-- bruitages -->
+      <audio id="sfx01" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="4.85" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx02" class="clip" src="assets/sfx/whoosh.mp3" data-start="5.6" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx03" class="clip" src="assets/sfx/pop.mp3" data-start="9.25" data-duration="0.72" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="sfx04" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="11.15" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx05" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="12.1" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx06" class="clip" src="assets/sfx/click-soft.mp3" data-start="14.5" data-duration="0.37" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sfx07" class="clip" src="assets/sfx/click-soft.mp3" data-start="16.0" data-duration="0.37" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sfx08" class="clip" src="assets/sfx/click-soft.mp3" data-start="16.9" data-duration="0.37" data-track-index="11" data-volume="0.4"></audio>
+      <audio id="sfx09" class="clip" src="assets/sfx/chime.mp3" data-start="17.1" data-duration="2.54" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="sfx10" class="clip" src="assets/sfx/whoosh.mp3" data-start="20.55" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx11" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="23.3" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx12" class="clip" src="assets/sfx/pop.mp3" data-start="23.85" data-duration="0.72" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="sfx13" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="28.1" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx14" class="clip" src="assets/sfx/pop.mp3" data-start="28.85" data-duration="0.72" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="sfx15" class="clip" src="assets/sfx/pop.mp3" data-start="29.0" data-duration="0.72" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="sfx16" class="clip" src="assets/sfx/whoosh-cinematic.mp3" data-start="31.6" data-duration="5.54" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx17" class="clip" src="assets/sfx/notification.mp3" data-start="33.05" data-duration="2.46" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="sfx18" class="clip" src="assets/sfx/click-soft.mp3" data-start="33.85" data-duration="0.37" data-track-index="13" data-volume="0.4"></audio>
+      <audio id="sfx19" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="34.7" data-duration="0.57" data-track-index="13" data-volume="0.3"></audio>
+      <audio id="sfx20" class="clip" src="assets/sfx/click.mp3" data-start="35.35" data-duration="0.37" data-track-index="13" data-volume="0.35"></audio>
+      <audio id="sfx21" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="40.6" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx22" class="clip" src="assets/sfx/chime.mp3" data-start="44.3" data-duration="2.54" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx23" class="clip" src="assets/sfx/whoosh-short.mp3" data-start="46.1" data-duration="0.57" data-track-index="12" data-volume="0.3"></audio>
+      <audio id="sfx24" class="clip" src="assets/sfx/whoosh.mp3" data-start="47.95" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx25" class="clip" src="assets/sfx/pop.mp3" data-start="48.75" data-duration="0.72" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="sfx26" class="clip" src="assets/sfx/whoosh.mp3" data-start="52.05" data-duration="0.57" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx27" class="clip" src="assets/sfx/pop.mp3" data-start="54.3" data-duration="0.72" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="sfx28" class="clip" src="assets/sfx/pop.mp3" data-start="55.2" data-duration="0.72" data-track-index="11" data-volume="0.35"></audio>
+      <audio id="sfx29" class="clip" src="assets/sfx/pop.mp3" data-start="55.9" data-duration="0.72" data-track-index="12" data-volume="0.35"></audio>
+      <audio id="sfx30" class="clip" src="assets/sfx/whoosh-cinematic.mp3" data-start="58.85" data-duration="5.54" data-track-index="11" data-volume="0.3"></audio>
+      <audio id="sfx31" class="clip" src="assets/sfx/sparkle.mp3" data-start="59.25" data-duration="1.8" data-track-index="12" data-volume="0.35"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#orb1", { x: 0, y: 0 }, { x: 60, y: 40, duration: 65, ease: "sine.inOut" }, 0);
+      tl.fromTo("#orb2", { x: 0, y: 0 }, { x: -70, y: -30, duration: 65, ease: "sine.inOut" }, 0);
+      tl.fromTo("#orb3", { x: 0, y: 0 }, { x: 40, y: -50, duration: 65, ease: "sine.inOut" }, 0);
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
